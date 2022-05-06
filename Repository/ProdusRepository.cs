@@ -19,6 +19,12 @@ namespace DAWW.Repository
             return Save();
         }
 
+        public bool DeleteProdus(Produs produs)
+        {
+            _context.Remove(produs);
+            return Save();
+        }
+
         public Produs GetProdusById(int id)
         {
             return _context.Produse.Where(x => x.Id == id).FirstOrDefault();
@@ -50,6 +56,12 @@ namespace DAWW.Repository
             if (saved > 0)
                 return true;
             return false;
+        }
+
+        public bool UpdateProdus(Produs produs)
+        {
+            _context.Update(produs);
+            return Save();
         }
     }
 }

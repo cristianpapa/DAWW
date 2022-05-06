@@ -65,6 +65,53 @@ namespace DAWW.Controllers
             return Ok();
             
         }
+        [HttpPut]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult UpdateProdus(int produsId, [FromBody]ProdusDto produsUpdated)
+        {
+            if (produsUpdated == null)
+                return BadRequest(ModelState);
+
+            if(produsId != produsUpdated.Id)
+                return BadRequest(ModelState);
+
+            if (!_produsRepository.ProdusExists(produsId))
+                return NotFound();
+
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var produsMapat = _mapper.Map<Produs>(produsUpdated);
+
+            if(!_produsRepository.UpdateProdus(produsMapat))
+            {
+                ModelState.AddModelError("", "Eroare");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+        }
+        [HttpDelete("{produsId}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        public IActionResult DeleteProdus(int produsId)
+        {
+            if (!_produsRepository.ProdusExists(produsId))
+                return NotFound();
+
+
+            var deletedProdus = _produsRepository.GetProdusById(produsId);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if(!_produsRepository.DeleteProdus(deletedProdus))
+            {
+                ModelState.AddModelError("", "Eroare");
+            }
+            return NoContent();
+        }
 
 
     }

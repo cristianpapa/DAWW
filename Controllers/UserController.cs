@@ -66,6 +66,53 @@ namespace DAWW.Controllers
             return Ok();
 
         }
+        [HttpPut]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult UpdateUser(int userId, [FromBody] UserDto userUpdated)
+        {
+            if (userUpdated == null)
+                return BadRequest(ModelState);
+
+            if (userId != userUpdated.Id)
+                return BadRequest(ModelState);
+
+            if (!_userRepository.UserExistsById(userId))
+                return NotFound();
+
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var userMapat = _mapper.Map<User>(userUpdated);
+
+            if (!_userRepository.UpdateUser(userMapat))
+            {
+                ModelState.AddModelError("", "Eroare");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+        }
+        [HttpDelete("{userId}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        public IActionResult DeleteProdus(int userId)
+        {
+            if (!_userRepository.UserExistsById(userId))
+                return NotFound();
+
+
+            var deletedUser = _userRepository.GetUserById(userId);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!_userRepository.DeleteUser(deletedUser))
+            {
+                ModelState.AddModelError("", "Eroare");
+            }
+            return NoContent();
+        }
 
     }
 }

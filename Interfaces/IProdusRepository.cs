@@ -10,6 +10,9 @@ namespace DAWW.Interfaces
         Produs GetProdusByName(string nume);
         bool ProdusExists(int id);
         bool CreateProdus(Produs produs);
+        bool UpdateProdus(Produs produs);
+
+        bool DeleteProdus(Produs produs);
         bool Save();
 
  

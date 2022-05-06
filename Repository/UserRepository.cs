@@ -18,6 +18,12 @@ namespace DAWW.Repository
             return Save();
         }
 
+        public bool DeleteUser(User user)
+        {
+            _context.Remove(user);
+            return Save();
+        }
+
         public User GetUserById(int id)
         {
             return _context.Useri.Where(x => x.Id == id).FirstOrDefault();
@@ -41,10 +47,24 @@ namespace DAWW.Repository
             return false;
         }
 
+        public bool UpdateUser(User user)
+        {
+            _context.Update(user);
+            return Save();
+        }
+
         public bool UserExists(string email)
         {
             var useri = _context.Useri.Where(x => x.Email == email);
             if(useri.Count() > 0)
+                return true;
+            return false;
+        }
+
+        public bool UserExistsById(int id)
+        {
+            var useri = _context.Useri.Where(x => x.Id == id);
+            if (useri.Count() > 0)
                 return true;
             return false;
         }
