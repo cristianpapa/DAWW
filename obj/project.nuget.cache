@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "jtsUcLjVKbwSbLaof5KjD3pvOa8nMFkmibCG5NAuymnXouwH0C/TzRPu28dln1/nDwGz5L4vR7s/n1TeP/QHPg==",
+  "dgSpecHash": "tgrcbh431fv8GGaJfkcgv2Fdp5sTzfMdOhbMDGaByOD5Qpu8ESQkzi9+zf54UqPlLLpT/bcGqyZ0G09ZQQqbbQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\crist\\source\\repos\\DAWW\\DAWW\\DAWW.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\crist\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
+    "C:\\Users\\crist\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
     "C:\\Users\\crist\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\crist\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\6.0.4\\microsoft.aspnetcore.jsonpatch.6.0.4.nupkg.sha512",
     "C:\\Users\\crist\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\6.0.4\\microsoft.aspnetcore.mvc.newtonsoftjson.6.0.4.nupkg.sha512",

@@ -1,4 +1,5 @@
 ﻿using DAWW.Data;
+using DAWW.Dto;
 using DAWW.Interfaces;
 using DAWW.Models;
 
@@ -10,6 +11,12 @@ namespace DAWW.Repository
         public ProdusRepository(DataContext context)
         {
             _context = context;
+        }
+
+        public bool CreateProdus(Produs produs)
+        {
+            _context.Add(produs);
+            return Save();
         }
 
         public Produs GetProdusById(int id)
@@ -35,6 +42,14 @@ namespace DAWW.Repository
             if (produs.Count() > 0)
                 return true;
             return false; 
+        }
+
+        public bool Save()
+        {
+            var saved = _context.SaveChanges();
+            if (saved > 0)
+                return true;
+            return false;
         }
     }
 }

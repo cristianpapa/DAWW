@@ -1,4 +1,5 @@
-﻿using DAWW.Models;
+﻿using DAWW.Dto;
+using DAWW.Models;
 
 namespace DAWW.Interfaces
 {
@@ -8,6 +9,10 @@ namespace DAWW.Interfaces
         Produs GetProdusById(int id);
         Produs GetProdusByName(string nume);
         bool ProdusExists(int id);
+        bool CreateProdus(Produs produs);
+        bool Save();
+
+ 
         
     }
 }
