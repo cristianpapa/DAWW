@@ -29,6 +29,24 @@ namespace DAWW.Controllers
                 return BadRequest(ModelState);
             return Ok(achizitii);
         }
+        [HttpPost]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult CreateAchizitie([FromBody] AchizitieDto achizitieCreata)
+        {
+            if (achizitieCreata == null)
+                return BadRequest(ModelState);
+
+            var achizitieMapata = _mapper.Map<Achizitie>(achizitieCreata);
+            if (!_achizitieRepository.CreateAchizitie(achizitieMapata))
+            {
+                ModelState.AddModelError("", "Eroare");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok();
+
+        }
 
     }
 }

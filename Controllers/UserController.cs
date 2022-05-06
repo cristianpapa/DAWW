@@ -41,5 +41,31 @@ namespace DAWW.Controllers
             return Ok(user);
         }
 
+        [HttpPost]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult CreateUser([FromBody] UserDto userCreat)
+        {
+            if (userCreat == null)
+                return BadRequest(ModelState);
+
+            var userExistent = _userRepository.GetUseri().Where(x=> x.Email == userCreat.Email).FirstOrDefault();
+            if (userExistent != null)
+            {
+                ModelState.AddModelError("", "Userul deja exista");
+                return StatusCode(422,ModelState);
+            }
+
+            var userMapat = _mapper.Map<User>(userCreat);
+            if (!_userRepository.CreateUser(userMapat))
+            {
+                ModelState.AddModelError("", "Eroare");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok();
+
+        }
+
     }
 }

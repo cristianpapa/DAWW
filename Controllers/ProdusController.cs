@@ -54,6 +54,7 @@ namespace DAWW.Controllers
             if (produsCreat == null)
                 return BadRequest(ModelState);
 
+
             var produsMapat = _mapper.Map<Produs>(produsCreat);
             if(!_produsRepository.CreateProdus(produsMapat))
             {

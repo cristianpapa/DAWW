@@ -8,5 +8,9 @@ namespace DAWW.Interfaces
         User GetUserById(int id);
         User GetUserByMail(string mail);
         bool UserExists(string email);
+
+        bool CreateUser(User user);
+
+        bool Save();
     }
 }
