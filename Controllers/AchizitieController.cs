@@ -29,11 +29,18 @@ namespace DAWW.Controllers
                 return BadRequest(ModelState);
             return Ok(achizitii);
         }
-        [HttpPost]
+        [HttpPost("adaugareAchizitie/u{user}&p{produs}&c{comanda}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public IActionResult CreateAchizitie([FromBody] AchizitieDto achizitieCreata)
+        public IActionResult CreateAchizitie([FromRoute] int user, [FromRoute] int produs, [FromRoute] int comanda)
         {
+            
+
+            var achizitieCreata = new Achizitie();
+            achizitieCreata.IdUser = user;
+            achizitieCreata.IdProdus = produs;
+            achizitieCreata.IdComanda = comanda;
+
             if (achizitieCreata == null)
                 return BadRequest(ModelState);
 

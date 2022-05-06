@@ -19,7 +19,7 @@ namespace DAWW.Controllers
             _mapper = mapper;
 
          }
-        [HttpGet]
+        [HttpGet("users/all")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<User>))]
         public IActionResult GetUseri()
         {
@@ -28,7 +28,7 @@ namespace DAWW.Controllers
                 return BadRequest(ModelState);
             return Ok(useri);
         }
-        [HttpGet("{mail}")]
+        [HttpGet("users/{mail}")]
         [ProducesResponseType(200, Type = typeof(User))]
         [ProducesResponseType(400)]
         public IActionResult GetUserByEmail(string mail)
@@ -41,7 +41,7 @@ namespace DAWW.Controllers
             return Ok(user);
         }
 
-        [HttpPost]
+        [HttpPost("adaugareUser")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         public IActionResult CreateUser([FromBody] UserDto userCreat)
@@ -66,7 +66,7 @@ namespace DAWW.Controllers
             return Ok();
 
         }
-        [HttpPut]
+        [HttpPut("updateUser/{userId}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
@@ -94,16 +94,35 @@ namespace DAWW.Controllers
 
             return NoContent();
         }
-        [HttpDelete("{userId}")]
+        [HttpDelete("DeleteById/{userId}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
-        public IActionResult DeleteProdus(int userId)
+        public IActionResult DeleteUser(int userId)
         {
             if (!_userRepository.UserExistsById(userId))
                 return NotFound();
 
 
             var deletedUser = _userRepository.GetUserById(userId);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!_userRepository.DeleteUser(deletedUser))
+            {
+                ModelState.AddModelError("", "Eroare");
+            }
+            return NoContent();
+        }
+        [HttpDelete("DeleteByEmail/{email}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        public IActionResult DeleteUser(string email)
+        {
+            if (!_userRepository.UserExists(email))
+                return NotFound();
+
+
+            var deletedUser = _userRepository.GetUserByMail(email);
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 

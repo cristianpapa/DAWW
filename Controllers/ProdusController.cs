@@ -45,15 +45,15 @@ namespace DAWW.Controllers
 
             return Ok(produs);
         }
-    
-        [HttpPost]
+        
+        [HttpPost("adaugareProdus")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         public IActionResult CreateProdus([FromBody] ProdusDto produsCreat)
         {
             if (produsCreat == null)
                 return BadRequest(ModelState);
-
+ 
 
             var produsMapat = _mapper.Map<Produs>(produsCreat);
             if(!_produsRepository.CreateProdus(produsMapat))
