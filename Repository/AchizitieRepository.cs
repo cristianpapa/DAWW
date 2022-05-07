@@ -1,12 +1,16 @@
-﻿using DAWW.Data;
+﻿using AutoMapper;
+using DAWW.Data;
+using DAWW.Dto;
 using DAWW.Interfaces;
 using DAWW.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DAWW.Repository
 {
     public class AchizitieRepository : IAchizitieRepository
     {
         private readonly DataContext _context;
+        private readonly IMapper _mapper;
 
         public AchizitieRepository(DataContext context)
         {
@@ -21,7 +25,8 @@ namespace DAWW.Repository
 
         public ICollection<Achizitie> GetAchizitii()
         {
-            return _context.Achizitii.OrderBy(x => x.IdUser).ToList();
+            //return _mapper.Map<List<AchizitieDto2>>(_context.Achizitii.OrderBy(x => x.IdUser).Include(x => x.User).ToList());
+            return _context.Achizitii.OrderBy(x => x.IdUser).Include(x => x.User).ToList();
         }
 
         public bool Save()

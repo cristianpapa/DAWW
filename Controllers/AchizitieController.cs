@@ -24,7 +24,7 @@ namespace DAWW.Controllers
         [ProducesResponseType(200, Type = typeof(IEnumerable<Achizitie>))]
         public IActionResult GetAchizitii()
         {
-            var achizitii = _mapper.Map<List<AchizitieDto>>(_achizitieRepository.GetAchizitii());
+            var achizitii = _mapper.Map<List<AchizitieDto2>>(_achizitieRepository.GetAchizitii());
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             return Ok(achizitii);

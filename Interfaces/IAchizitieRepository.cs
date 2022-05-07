@@ -1,4 +1,5 @@
-﻿using DAWW.Models;
+﻿using DAWW.Dto;
+using DAWW.Models;
 
 namespace DAWW.Interfaces
 {

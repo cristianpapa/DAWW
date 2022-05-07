@@ -14,6 +14,9 @@ namespace DAWW.Helper
             CreateMap<UserDto, User>();
             CreateMap<Achizitie, AchizitieDto>();
             CreateMap<AchizitieDto, Achizitie>();
+
+            CreateMap<Achizitie, AchizitieDto2>();
+            CreateMap<AchizitieDto2, Achizitie>();
         }
     }
 }
